@@ -1,7 +1,7 @@
 # Kuchiki
 
 ## What is it?
-* Kuchiki is a C compiler implemented in C++20 strictly following the [Google Style Guide for C++]().
+* Kuchiki is a C compiler implemented in C++20 strictly following the [Google Style Guide for C++](https://google.github.io/styleguide/cppguide.html).
 
 
 ## Main References
