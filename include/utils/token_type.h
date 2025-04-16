@@ -1,7 +1,12 @@
 // Copyright - Victor Miguel de Morais Costa
+#ifndef KUCHIKI_UTILS_TOKEN_TYPE_H
+#define KUCHIKI_UTILS_TOKEN_TYPE_H
 
 #include <array>
 #include <string>
+
+namespace kuchiki {
+namespace utils {
 
 enum TokenType {
   // One-Character Token Types
@@ -25,3 +30,8 @@ enum TokenType {
 };
 
 std::string TokenTypeToString(TokenType type);
+
+} // namespace utils
+} // namespace kuchiki
+
+#endif
