@@ -2,6 +2,9 @@
 
 #include "../../include/utils/token_type.h"
 
+namespace kuchiki {
+namespace utils {
+
 std::string TokenTypeToString(TokenType type) {
   static const std::array<std::string, 11> strings{
       "LEFT_PAREN", "RIGHT_PAREN", "LEFT_BRACE", "RIGHT_BRACE",
@@ -10,3 +13,6 @@ std::string TokenTypeToString(TokenType type) {
 
   return strings[static_cast<int>(type)];
 };
+
+} // namespace utils
+} // namespace kuchiki
