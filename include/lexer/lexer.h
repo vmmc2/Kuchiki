@@ -14,12 +14,17 @@ namespace lexer {
 class Lexer {
 public:
   Lexer(std::string source_file_content);
-  const std::vector<kuchiki::utils::Token> &Lex();
+  void AddToken(kuchiki::utils::TokenType type, std::any value);
+  void AddToken(kuchiki::utils::TokenType type);
+  char Advance();
   bool IsAlpha(char c);
   bool IsAlphaNumeric(char c);
-  bool IsDigit(char c);
   bool IsAtEnd();
-  char Peek(int index);
+  bool IsDigit(char c);
+  void LexToken();
+  const std::vector<kuchiki::utils::Token> &LexTokens();
+  bool Match(char expected);
+  char Peek(std::size_t offset);
 
 private:
   int start_index_ = 0;
