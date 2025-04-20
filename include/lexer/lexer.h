@@ -2,6 +2,7 @@
 #ifndef KUCHIKI_LEXER_LEXER_H
 #define KUCHIKI_LEXER_LEXER_H
 
+#include <cstddef>
 #include <map>
 #include <string>
 #include <vector>
@@ -17,6 +18,7 @@ public:
   void AddToken(kuchiki::utils::TokenType type, std::any value);
   void AddToken(kuchiki::utils::TokenType type);
   char Advance();
+  void Identifier();
   bool IsAlpha(char c);
   bool IsAlphaNumeric(char c);
   bool IsAtEnd();
@@ -24,11 +26,12 @@ public:
   void LexToken();
   const std::vector<kuchiki::utils::Token> &LexTokens();
   bool Match(char expected);
+  void Number();
   char Peek(std::size_t offset);
 
 private:
-  int start_index_ = 0;
-  int current_index_ = 0;
+  std::size_t start_index_ = 0;
+  std::size_t current_index_ = 0;
   int current_line_ = 1;
   int current_column_ = 1;
   std::string source_file_content_;
