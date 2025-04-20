@@ -19,6 +19,7 @@ public:
   void AddToken(kuchiki::utils::TokenType type);
   char Advance();
   void Identifier();
+  void Integer();
   bool IsAlpha(char c);
   bool IsAlphaNumeric(char c);
   bool IsAtEnd();
@@ -26,7 +27,6 @@ public:
   void LexToken();
   const std::vector<kuchiki::utils::Token> &LexTokens();
   bool Match(char expected);
-  void Number();
   char Peek(std::size_t offset);
 
 private:

@@ -31,7 +31,37 @@ char Lexer::Advance() {
   return source_file_content_[current_index_ - 1];
 }
 
-void Lexer::Identifier() {}
+void Lexer::Identifier() {
+  while (!IsAtEnd() && IsAlphaNumeric(Peek(0))) {
+    Advance();
+  }
+
+  if (IsAlphaNumeric(Peek(0))) {
+    throw std::runtime_error{"Error while lexing an identifier."};
+  }
+
+  std::string lexeme =
+      source_file_content_.substr(start_index_, current_index_ - start_index_);
+
+  kuchiki::utils::TokenType type = keywords_.find(lexeme) != keywords_.end()
+                                       ? keywords_[lexeme]
+                                       : kuchiki::utils::TokenType::kIdentifier;
+
+  AddToken(type);
+}
+
+void Lexer::Integer() {
+  while (!IsAtEnd() && IsDigit(Peek(0))) {
+    Advance();
+  }
+  if (IsAlphaNumeric(Peek(0))) {
+    throw std::runtime_error{"Error while lexing a number constant."};
+  }
+
+  std::any value = std::stoi(
+      source_file_content_.substr(start_index_, current_index_ - start_index_));
+  AddToken(kuchiki::utils::TokenType::kInt, value);
+}
 
 bool Lexer::IsAlpha(char c) {
   return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == '_');
@@ -79,7 +109,7 @@ void Lexer::LexToken() {
     }
     // Possible Integer Constant
     else if (IsDigit(current_char)) {
-      Number();
+      Integer();
     }
     break;
   }
@@ -97,19 +127,6 @@ const std::vector<kuchiki::utils::Token> &Lexer::LexTokens() {
 }
 
 bool Lexer::Match(char expected) { return true; }
-
-void Lexer::Number() {
-  while (!IsAtEnd() && IsDigit(Peek(1))) {
-    Advance();
-  }
-  if (IsAlpha(Peek(1))) {
-    throw std::runtime_error{"Error while lexing a number constant."};
-  }
-
-  std::any value = std::stoi(
-      source_file_content_.substr(start_index_, current_index_ - start_index_));
-  AddToken(kuchiki::utils::TokenType::kInt, value);
-}
 
 char Lexer::Peek(std::size_t offset) {
   if (IsAtEnd() || current_index_ + offset >= source_file_content_.length()) {
