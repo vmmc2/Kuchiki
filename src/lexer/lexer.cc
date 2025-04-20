@@ -1,6 +1,7 @@
 // Copyright - Victor Miguel de Morais Costa
 
 #include "../../include/lexer/lexer.h"
+#include <stdexcept>
 
 namespace kuchiki {
 
@@ -29,6 +30,8 @@ char Lexer::Advance() {
 
   return source_file_content_[current_index_ - 1];
 }
+
+void Lexer::Identifier() {}
 
 bool Lexer::IsAlpha(char c) {
   return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == '_');
@@ -94,6 +97,19 @@ const std::vector<kuchiki::utils::Token> &Lexer::LexTokens() {
 }
 
 bool Lexer::Match(char expected) { return true; }
+
+void Lexer::Number() {
+  while (!IsAtEnd() && IsDigit(Peek(1))) {
+    Advance();
+  }
+  if (IsAlpha(Peek(1))) {
+    throw std::runtime_error{"Error while lexing a number constant."};
+  }
+
+  std::any value = std::stoi(
+      source_file_content_.substr(start_index_, current_index_ - start_index_));
+  AddToken(kuchiki::utils::TokenType::kInt, value);
+}
 
 char Lexer::Peek(std::size_t offset) {
   if (IsAtEnd() || current_index_ + offset >= source_file_content_.length()) {
