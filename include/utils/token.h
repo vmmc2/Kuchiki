@@ -5,6 +5,7 @@
 #include <any>
 #include <ostream>
 #include <string>
+#include <typeinfo>
 
 #include "../../include/utils/token_type.h"
 
