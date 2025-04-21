@@ -1,6 +1,8 @@
 // Copyright - Victor Miguel de Morais Costa
 
 #include "../../include/lexer/lexer.h"
+#include <iostream>
+#include <stdexcept>
 
 namespace kuchiki {
 
@@ -30,13 +32,16 @@ char Lexer::Advance() {
   return source_file_content_[current_index_ - 1];
 }
 
+bool Lexer::found_lexing_error() { return found_lexing_error_; }
+
 void Lexer::Identifier() {
   while (!IsAtEnd() && IsAlphaNumeric(Peek(0))) {
     Advance();
   }
 
   if (IsAlphaNumeric(Peek(0))) {
-    throw std::runtime_error{"Error while lexing an identifier."};
+    found_lexing_error_ = true;
+    return;
   }
 
   std::string lexeme =
@@ -54,7 +59,8 @@ void Lexer::Integer() {
     Advance();
   }
   if (IsAlphaNumeric(Peek(0))) {
-    throw std::runtime_error{"Error while lexing a number constant."};
+    found_lexing_error_ = true;
+    return;
   }
 
   std::any value = std::stoi(
@@ -93,6 +99,17 @@ void Lexer::LexToken() {
   case ';':
     AddToken(kuchiki::utils::TokenType::kSemicolon);
     break;
+  case '/':
+    // Single-Line Comment
+    if (Match('/')) {
+      SingleLineComment();
+      // Multi-Line Comment
+    } else if (Match('*')) {
+      MultiLineComment();
+      // Division Operator
+    } else {
+    }
+    break;
   case '\n':
     current_line_ += 1;
     current_column_ = 1;
@@ -100,6 +117,7 @@ void Lexer::LexToken() {
   case ' ':
   case '\r':
   case '\t':
+    current_column_ += 1;
     break;
   default:
     // Possible Identifier
@@ -109,8 +127,13 @@ void Lexer::LexToken() {
     // Possible Integer Constant
     else if (IsDigit(current_char)) {
       Integer();
+    } else {
+      found_lexing_error_ = true;
     }
     break;
+  }
+  if (found_lexing_error_) {
+    return;
   }
 }
 
@@ -118,6 +141,9 @@ const std::vector<kuchiki::utils::Token> &Lexer::LexTokens() {
   while (!IsAtEnd()) {
     start_index_ = current_index_;
     LexToken();
+    if (found_lexing_error_) {
+      break;
+    }
   }
   tokens_.push_back(kuchiki::utils::Token{current_line_, current_column_,
                                           kuchiki::utils::TokenType::kFileEnd,
@@ -125,13 +151,47 @@ const std::vector<kuchiki::utils::Token> &Lexer::LexTokens() {
   return tokens_;
 }
 
-bool Lexer::Match(char expected) { return true; }
+bool Lexer::Match(char expected) {
+  if (IsAtEnd()) {
+    return false;
+  } else if (source_file_content_[current_index_] != expected) {
+    return false;
+  } else {
+    current_index_ += 1;
+    return true;
+  }
+}
+
+void Lexer::MultiLineComment() {
+  while (!IsAtEnd()) {
+    std::cout << source_file_content_[current_index_] << std::endl;
+    if (Peek(0) == '\n') {
+      current_line_ += 1;
+    } else if (Peek(0) == '*' && Peek(1) == '/') {
+      Advance();
+      Advance();
+      return;
+    } else {
+      Advance();
+    }
+  }
+
+  if (IsAtEnd()) {
+    throw std::runtime_error{"Unfinished Multi-Line Comment."};
+  }
+}
 
 char Lexer::Peek(std::size_t offset) {
   if (IsAtEnd() || current_index_ + offset >= source_file_content_.length()) {
     return '\0';
   } else {
     return source_file_content_[current_index_ + offset];
+  }
+}
+
+void Lexer::SingleLineComment() {
+  while (!IsAtEnd() && Peek(0) != '\n') {
+    Advance();
   }
 }
 
