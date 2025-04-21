@@ -2,6 +2,9 @@
 #ifndef KUCHIKI_UTILS_FILE_SCANNER_H
 #define KUCHIKI_UTILS_FILE_SCANNER_H
 
+#include <filesystem>
+#include <fstream>
+#include <stdexcept>
 #include <string>
 
 namespace kuchiki {
