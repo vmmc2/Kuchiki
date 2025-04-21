@@ -20,5 +20,11 @@ const std::string &Token::lexeme() { return lexeme_; }
 
 const std::any &Token::value() { return value_; }
 
+std::ostream& operator<<(std::ostream& os, const Token& token) {
+  os << "foo";
+
+  return os;
+}
+
 } // namespace utils
 } // namespace kuchiki

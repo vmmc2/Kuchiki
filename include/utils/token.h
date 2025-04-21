@@ -3,6 +3,7 @@
 #define KUCHIKI_UTILS_TOKEN_H
 
 #include <any>
+#include <ostream>
 #include <string>
 
 #include "../../include/utils/token_type.h"
@@ -19,6 +20,7 @@ public:
   TokenType type();
   const std::string &lexeme();
   const std::any &value();
+  friend std::ostream& operator <<(std::ostream& os, const Token& token);
 
 private:
   int line_;
