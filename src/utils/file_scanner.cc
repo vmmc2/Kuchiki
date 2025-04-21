@@ -13,7 +13,9 @@ FileScanner::FileScanner(std::string source_file_path)
 void FileScanner::Scan() {
   std::filesystem::path path{source_file_path_};
   if (path.extension() != ".c") {
-    throw std::runtime_error{"The compiler expected a '.c' file."};
+    throw std::runtime_error{"The compiler expected a '.c' file. But received "
+                             "a file with the following extension: " +
+                             std::string{path.extension()}};
   }
 
   std::ifstream file{source_file_path_,
