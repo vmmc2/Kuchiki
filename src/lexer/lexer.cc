@@ -1,7 +1,6 @@
 // Copyright - Victor Miguel de Morais Costa
 
 #include "../../include/lexer/lexer.h"
-#include <stdexcept>
 
 namespace kuchiki {
 
