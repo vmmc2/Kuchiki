@@ -1,7 +1,6 @@
 // Copyright - Victor Miguel de Morais Costa
 
 #include "../../include/lexer/lexer.h"
-#include <iostream>
 #include <stdexcept>
 
 namespace kuchiki {
@@ -164,16 +163,14 @@ bool Lexer::Match(char expected) {
 
 void Lexer::MultiLineComment() {
   while (!IsAtEnd()) {
-    std::cout << source_file_content_[current_index_] << std::endl;
     if (Peek(0) == '\n') {
       current_line_ += 1;
     } else if (Peek(0) == '*' && Peek(1) == '/') {
       Advance();
       Advance();
       return;
-    } else {
-      Advance();
     }
+    Advance();
   }
 
   if (IsAtEnd()) {
