@@ -1,3 +1,5 @@
+// Copyright - Victor Miguel de Morais Costa
+
 #include <iostream>
 #include <vector>
 
