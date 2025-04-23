@@ -14,7 +14,7 @@ public:
   Parser(const std::vector<kuchiki::utils::Token> &tokens);
 
 private:
-  const std::vector<kuchiki::utils::Token> tokens_;
+  const std::vector<kuchiki::utils::Token>& tokens_;
 };
 
 } // namespace parser
