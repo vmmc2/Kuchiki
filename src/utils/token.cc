@@ -1,8 +1,6 @@
 // Copyright - Victor Miguel de Morais Costa
 
 #include "../../include/utils/token.h"
-#include <any>
-#include <stdexcept>
 
 namespace kuchiki {
 namespace utils {
@@ -24,18 +22,18 @@ const std::any &Token::value() { return value_; }
 
 std::ostream &operator<<(std::ostream &os, const Token &token) {
   os << "[Token] - Line: " << token.line_ << " - Column: " << token.column_
-  << " - Type: " << TokenTypeToString(token.type_)
-  << " - Lexeme: " << token.lexeme_ << " - Value: ";
+     << " - Type: " << TokenTypeToString(token.type_)
+     << " - Lexeme: " << token.lexeme_ << " - Value: ";
 
-  if(token.value_.type() == typeid(int)){
+  if (token.value_.type() == typeid(int)) {
     int val = std::any_cast<int>(token.value_);
     os << val << std::endl;
-  }else if(token.value_.type() == typeid(std::string)){
+  } else if (token.value_.type() == typeid(std::string)) {
     std::string val = std::any_cast<std::string>(token.value_);
     os << val << std::endl;
-  }else if(token.value_.type() == typeid(nullptr)){
+  } else if (token.value_.type() == typeid(nullptr)) {
     os << "NULL" << std::endl;
-  }else{
+  } else {
     throw std::runtime_error{"Error while trying to print token information."};
   }
 

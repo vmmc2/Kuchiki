@@ -4,6 +4,7 @@
 
 #include <any>
 #include <ostream>
+#include <stdexcept>
 #include <string>
 #include <typeinfo>
 
