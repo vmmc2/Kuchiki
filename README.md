@@ -4,6 +4,16 @@
 * Kuchiki is a C compiler implemented in C++20 strictly following the [Google Style Guide for C++](https://google.github.io/styleguide/cppguide.html).
 
 
+## Context-Free Grammar
+* Here, you can find the formal grammar of this specific subset of C (C17) language that is being implemented by the Kuchiki compiler:
+```
+<program> ::= <function>
+<function> ::= "int" <IDENTIFIER> "(" "void" ")" "{" <stmt> "}"
+<stmt> ::= "return" <expr> ";"
+<expr> ::= <INT>
+```
+
+
 ## Main References
 * In order to build Kuchiki, the major reference used was the book [Writing a C Compiler: Build a Real Programming Language from Scratch](https://www.amazon.com/Writing-Compiler-Programming-Language-Scratch/dp/1718500424) by Nora Sandler. 
 * There are other references that were used in order to implement this compiler, such as:
