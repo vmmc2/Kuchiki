@@ -16,6 +16,10 @@ namespace lexer {
 class Lexer {
 public:
   Lexer(std::string source_file_content);
+  ~Lexer() = default;
+  const std::vector<kuchiki::utils::Token> &LexTokens();
+
+private:
   void AddToken(kuchiki::utils::TokenType type, std::any value);
   void AddToken(kuchiki::utils::TokenType type);
   char Advance();
@@ -27,13 +31,11 @@ public:
   bool IsAtEnd();
   bool IsDigit(char c);
   void LexToken();
-  const std::vector<kuchiki::utils::Token> &LexTokens();
   bool Match(char expected);
   void MultiLineComment();
   char Peek(std::size_t offset);
   void SingleLineComment();
 
-private:
   std::size_t start_index_ = 0;
   std::size_t current_index_ = 0;
   int current_line_ = 1;
