@@ -10,7 +10,7 @@
 <program> ::= <function>
 <function> ::= "int" <IDENTIFIER> "(" "void" ")" "{" <stmt> "}"
 <stmt> ::= "return" <expr> ";"
-<expr> ::= <INT>
+<expr> ::= <INTEGER>
 ```
 
 
