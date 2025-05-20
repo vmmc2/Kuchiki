@@ -17,13 +17,13 @@ class Lexer {
 public:
   Lexer(std::string source_file_content);
   ~Lexer() = default;
+  bool found_lexing_error();
   const std::vector<kuchiki::utils::Token> &LexTokens();
 
 private:
   void AddToken(kuchiki::utils::TokenType type, std::any value);
   void AddToken(kuchiki::utils::TokenType type);
   char Advance();
-  bool found_lexing_error();
   void Identifier();
   void Integer();
   bool IsAlpha(char c);

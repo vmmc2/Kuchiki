@@ -17,11 +17,11 @@ class Token {
 public:
   Token(int line, int column, TokenType type, std::string lexeme,
         std::any value);
-  int line();
-  int column();
-  TokenType type();
-  const std::string &lexeme();
-  const std::any &value();
+  int line() const;
+  int column() const;
+  TokenType type() const;
+  const std::string &lexeme() const;
+  const std::any &value() const;
   friend std::ostream& operator <<(std::ostream& os, const Token& token);
 
 private:

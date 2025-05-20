@@ -63,7 +63,7 @@ void Lexer::Integer() {
 
   std::any value = std::stoi(
       source_file_content_.substr(start_index_, current_index_ - start_index_));
-  AddToken(kuchiki::utils::TokenType::kInt, value);
+  AddToken(kuchiki::utils::TokenType::kIntegerConstant, value);
 }
 
 bool Lexer::IsAlpha(char c) {

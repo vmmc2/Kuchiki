@@ -10,15 +10,15 @@ Token::Token(int line, int column, TokenType type, std::string lexeme,
     : line_{line}, column_{column}, type_{type}, lexeme_{lexeme},
       value_{value} {}
 
-int Token::line() { return line_; }
+int Token::line() const { return line_; }
 
-int Token::column() { return column_; }
+int Token::column() const { return column_; }
 
-TokenType Token::type() { return type_; }
+TokenType Token::type() const { return type_; }
 
-const std::string &Token::lexeme() { return lexeme_; }
+const std::string &Token::lexeme() const { return lexeme_; }
 
-const std::any &Token::value() { return value_; }
+const std::any &Token::value() const { return value_; }
 
 std::ostream &operator<<(std::ostream &os, const Token &token) {
   os << "[Token] - Line: " << token.line_ << " - Column: " << token.column_

@@ -18,7 +18,7 @@ enum TokenType {
 
   // Multi-Character Token Types
   kIdentifier,
-  kInteger,
+  kIntegerConstant,
 
   // Keyword Token Types
   kInt,

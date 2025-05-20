@@ -8,7 +8,7 @@ namespace utils {
 std::string TokenTypeToString(TokenType type) {
   static const std::array<std::string, 11> strings{
       "LEFT_PAREN", "RIGHT_PAREN", "LEFT_BRACE", "RIGHT_BRACE",
-      "SEMICOLON",  "IDENTIFIER",  "INTEGER",    "INT",
+      "SEMICOLON",  "IDENTIFIER",  "INTEGER_CONSTANT",    "INT",
       "RETURN",     "VOID",        "FILE_END"};
 
   return strings[static_cast<int>(type)];
