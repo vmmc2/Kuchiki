@@ -6,7 +6,7 @@
 #include <memory>
 #include <vector>
 
-#include "../utils/token.h"
+#include "../utils/token.hpp"
 
 namespace kuchiki {
 namespace parser {

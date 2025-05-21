@@ -1,6 +1,6 @@
 // Copyright - Victor Miguel de Morais Costa
 
-#include "../../include/utils/file_scanner.h"
+#include "../../include/utils/file_scanner.hpp"
 
 namespace kuchiki {
 

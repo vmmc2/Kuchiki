@@ -1,6 +1,6 @@
 // Copyright - Victor Miguel de Morais Costa
 
-#include "../../include/utils/token.h"
+#include "../../include/utils/token.hpp"
 
 namespace kuchiki {
 namespace utils {

@@ -3,9 +3,9 @@
 #include <iostream>
 #include <vector>
 
-#include "../include/lexer/lexer.h"
-#include "../include/utils/file_scanner.h"
-#include "../include/utils/token.h"
+#include "../include/lexer/lexer.hpp"
+#include "../include/utils/file_scanner.hpp"
+#include "../include/utils/token.hpp"
 
 int main(int argc, char *argv[]) {
   kuchiki::utils::FileScanner file_scanner{argv[2]};

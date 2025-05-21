@@ -8,7 +8,7 @@
 #include <string>
 #include <typeinfo>
 
-#include "../../include/utils/token_type.h"
+#include "../../include/utils/token_type.hpp"
 
 namespace kuchiki {
 namespace utils {

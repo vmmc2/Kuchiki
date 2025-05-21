@@ -1,6 +1,6 @@
 // Copyright - Victor Miguel de Morais Costa
 
-#include "../../include/parser/parser.h"
+#include "../../include/parser/parser.hpp"
 
 namespace kuchiki {
 namespace parser {

@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "../../include/utils/token.h"
+#include "../../include/utils/token.hpp"
 
 namespace kuchiki {
 namespace lexer {
