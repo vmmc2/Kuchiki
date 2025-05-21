@@ -22,7 +22,7 @@ kuchiki::utils::Token Parser::Advance() {
   if (!IsAtEnd()) {
     current_index_++;
   }
-  
+
   return Previous();
 }
 
