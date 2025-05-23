@@ -3,9 +3,11 @@
 #define KUCHIKI_PARSER_PARSER_H
 
 #include <cstddef>
+#include <iostream>
 #include <memory>
 #include <vector>
 
+#include "../utils/ast_nodes.hpp"
 #include "../utils/token.hpp"
 
 namespace kuchiki {
@@ -13,25 +15,25 @@ namespace parser {
 
 class Parser {
 public:
-  Parser(const std::vector<kuchiki::utils::Token>& tokens);
+  Parser(const std::vector<kuchiki::utils::Token> &tokens);
   void ParseTokens();
 
 private:
-  void Program();
-  void Function();
-  void Statement();
-  void Expression();
+  std::shared_ptr<kuchiki::utils::ASTNode> Program();
+  std::shared_ptr<kuchiki::utils::FunctionNode> Function();
+  std::shared_ptr<kuchiki::utils::ReturnStatementNode> Statement();
+  std::shared_ptr<kuchiki::utils::ConstantExpressionNode> Expression();
 
   kuchiki::utils::Token Advance();
   bool Check(kuchiki::utils::TokenType token_type);
-  void Consume(kuchiki::utils::TokenType token_type, std::string& parse_error_message);
+  kuchiki::utils::Token Consume(kuchiki::utils::TokenType token_type,
+                                const std::string &parse_error_message);
   bool IsAtEnd();
   kuchiki::utils::Token Peek();
   kuchiki::utils::Token Previous();
 
   std::size_t current_index_ = 0;
   const std::vector<kuchiki::utils::Token> &tokens_;
-
 };
 
 } // namespace parser
